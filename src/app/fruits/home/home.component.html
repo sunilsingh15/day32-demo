@@ -1,4 +1,11 @@
+<br>
 <div class="container">
+  <div class="row">
+    <div class="col">
+      <a routerLink="/fruits/create" class="btn btn-primary">Create</a>
+    </div>
+  </div>
+  <br><br>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -15,6 +22,11 @@
         <td> {{ fruit.name }} </td>
         <td> {{ fruit.quantity }} </td>
         <td> {{ fruit.price }} </td>
+        <td>
+          <a [routerLink]="['/fruits/edit', fruit.id]" class="btn btn-success">Edit</a>
+          &nbsp;
+          <button class="btn btn-danger" (click)="delete(fruit.id)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>

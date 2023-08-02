@@ -19,4 +19,12 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  delete(id: number) {
+    this.fruitSvc.delete('fruits', id).subscribe(
+      (data) => {
+        this.allFruits = this.allFruits.filter(o => o.id != id);
+      }
+    )
+  }
+
 }

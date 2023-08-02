@@ -1,10 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Fruits } from '../fruits';
+import { FruitsService } from '../fruits.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent {
+export class EditComponent implements OnInit {
+
+  fruitObject: Fruits = {
+    id: 0,
+    name: '',
+    quantity: 0,
+    price: 0
+  }
+
+  constructor(private fruitSvc: FruitsService, private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((param) => {
+      var id = Number(param.get('id'));
+      this.getFruitByID(id);
+    })
+  }
+
+  getFruitByID(id: number) {
+    this.fruitSvc.getByID('fruits', id).subscribe((data) => {
+      this.fruitObject = data;
+    })
+  }
+
+  update() {
+    return this.fruitSvc.update('fruits', this.fruitObject).subscribe({
+      next: (data) => {
+      this.router.navigate(['/fruits/home']);
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  });
+  }
 
 }
