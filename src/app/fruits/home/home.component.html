@@ -1,1 +1,21 @@
-<p>home works!</p>
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Fruit</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fruit of allFruits">
+        <td> {{ fruit.id }} </td>
+        <td> {{ fruit.name }} </td>
+        <td> {{ fruit.quantity }} </td>
+        <td> {{ fruit.price }} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
